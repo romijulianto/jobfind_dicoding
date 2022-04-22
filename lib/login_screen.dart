@@ -1,8 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:jobfind_dicoding/home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<LoginScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  String? value;
+  _login() {
+    print(nameController.text);
+    print(passwordController.text);
+
+    if (passwordController.text == "romijr123") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(
+            value: nameController.text.toString(),
+          ),
+        ),
+      );
+    } else {
+      final snackBar = SnackBar(
+        content: const Text('Invalid Username dan password'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+          },
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +71,9 @@ class LoginScreen extends StatelessWidget {
                     border: Border.all(color: const Color(0xff475BD8)),
                     borderRadius: BorderRadius.circular(10)),
                 child: TextFormField(
+                  controller: nameController,
                   decoration:
-                      const InputDecoration.collapsed(hintText: "Email"),
+                      const InputDecoration.collapsed(hintText: "Email atau Username"),
                 ),
               ),
               const SizedBox(
@@ -54,6 +87,7 @@ class LoginScreen extends StatelessWidget {
                     border: Border.all(color: const Color(0xff475BD8)),
                     borderRadius: BorderRadius.circular(10)),
                 child: TextFormField(
+                  controller: passwordController,
                   decoration:
                       const InputDecoration.collapsed(hintText: "Password"),
                 ),
@@ -70,11 +104,7 @@ class LoginScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
+                    _login();
                   },
                   child: const Text(
                     "Login",

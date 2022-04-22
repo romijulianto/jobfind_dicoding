@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-
-class DrawerScreen extends StatefulWidget {
+class DrawerScreen extends StatelessWidget {
   const DrawerScreen({Key? key}) : super(key: key);
 
-  @override
-  State<DrawerScreen> createState() => _DrawerSceneState();
-}
-
-class _DrawerSceneState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
